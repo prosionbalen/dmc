@@ -168,4 +168,9 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public static function powered()
+    {
+        return 'Powered by <a href="http://'.$_SERVER['HTTP_HOST'].'/" rel="external">DigiMenuCard</a>';
+    }
 }

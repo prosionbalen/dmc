@@ -30,11 +30,11 @@ phpunit.phar
 /phpunit.xml
 
 #yii specific files
-frontend/assets/*
-!frontend/assets/.gitignore
+frontend/web/assets/*
+!frontend/web/assets/.gitignore
 frontend/runtime/*
 !frontend/runtime/.gitignore
-backend/assets/*
-!backend/assets/.gitignore
+backend/web/assets/*
+!backend/web/assets/.gitignore
 backend/runtime/*
 !backend/runtime/.gitignore
