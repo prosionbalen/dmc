@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use frontend\models\DUserDetail;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -12,6 +13,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+ * @property string $email
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $auth_key
@@ -53,7 +55,9 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-
+            ['email','required'],
+            ['email','string', 'max'=>255],
+            ['email','email'],
             ['role', 'default', 'value' => self::ROLE_USER],
             ['role', 'in', 'range' => [self::ROLE_USER]],
         ];
@@ -188,5 +192,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * Find a user by Email ID
+     */
+    public function findByEmailID($emailId)
+    {
+        return \frontend\models\FContact::model()->findByAttributes(array('type_id'=>2,'detail'=>$emailId));
     }
 }
